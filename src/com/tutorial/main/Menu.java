@@ -9,11 +9,19 @@ import static java.awt.Font.BOLD;
 public class Menu extends MouseAdapter {
 
     public void mousePressed(MouseEvent e) {
+        int mx = e.getX();
+        int my = e.getX();
 
     }
 
     public void mouseReleased(MouseEvent e) {
 
+    }
+
+    private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
+        if(mx > x && mx < x + width) {
+            return my > y && my < y + height;
+        } else return false;
     }
 
     public void tick(){
