@@ -96,6 +96,8 @@ public class Game extends Canvas implements Runnable {
         if(gameState == STATE.Game) {
             hud.tick();
             spawner.tick();
+        } else if(gameState == STATE.Menu) {
+            menu.tick();
         }
     }
 
@@ -115,9 +117,8 @@ public class Game extends Canvas implements Runnable {
 
         if (gameState == STATE.Game) {
             hud.render(g);
-        }else {
-            g.setColor(Color.white);
-            g.drawString("Menu", 100, 100);
+        }else if(gameState == STATE.Menu) {
+            menu.tick();
         }
         g.dispose();
         bs.show();
