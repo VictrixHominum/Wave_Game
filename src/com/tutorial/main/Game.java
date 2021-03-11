@@ -15,6 +15,7 @@ public class Game extends Canvas implements Runnable {
     private Handler handler;
     private HUD hud;
     private Spawn spawner;
+    private Menu menu;
 
     public enum STATE {
         Menu,
@@ -24,14 +25,15 @@ public class Game extends Canvas implements Runnable {
     public STATE gameState = STATE.Menu;
 
     public Game() {
-        handler = new Handler();
 
+        handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
 
         new Window(WIDTH, HEIGHT, "Let's build a game", this);
 
         hud = new HUD();
         spawner = new Spawn(handler, hud);
+        menu = new Menu();
         r = new Random();
 
         if(gameState == STATE.Game) {
@@ -113,6 +115,9 @@ public class Game extends Canvas implements Runnable {
 
         if (gameState == STATE.Game) {
             hud.render(g);
+        }else {
+            g.setColor(Color.white);
+            g.drawString("Menu", 100, 100);
         }
         g.dispose();
         bs.show();
