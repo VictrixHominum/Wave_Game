@@ -98,7 +98,7 @@ public class Menu extends MouseAdapter {
 
 
             g.setFont(fnt3);
-            g.drawString("Use WSAD keys to move player and dodge enemies.", 68, 175);
+            g.drawString("Use WASD keys to move player and dodge enemies.", 68, 175);
 
             g.setFont(fnt2);
             g.drawRect(215, 300, 200, 64);
