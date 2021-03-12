@@ -28,6 +28,7 @@ public class Menu extends MouseAdapter {
 
         //Play button
         if(mouseOver(mx, my, 215, 100, 200, 64)) {
+            handler.object.clear();
             game.gameState = STATE.Game;
             handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
 

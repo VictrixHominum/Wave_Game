@@ -19,8 +19,11 @@ public class MenuParticle extends GameObject{
 
         dir = r.nextInt(2);
 
-        velX = (r.nextInt(5 - -5 + 1) -5);
-        velY = (r.nextInt(5 - -5 + 1) -5);
+        velX = (r.nextInt(6 - -6 + 1) -6);
+        velY = (r.nextInt(6 - -6 + 1) -6);
+
+        if(velX == 0) velX = 1;
+        if(velY == 0) velY = 1;
 
 
         col = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
