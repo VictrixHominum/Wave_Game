@@ -11,6 +11,8 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private Boolean running = false;
 
+    public static Boolean paused = false;
+
     private Random r;
     private Handler handler;
     private HUD hud;
@@ -32,7 +34,7 @@ public class Game extends Canvas implements Runnable {
         hud = new HUD();
         menu = new Menu(this, handler, hud);
         this.addMouseListener(menu);
-        this.addKeyListener(new KeyInput(handler));
+        this.addKeyListener(new KeyInput(handler, this));
 
         AudioPlayer.load();
         AudioPlayer.getMusic("ContraChop").loop();
@@ -95,17 +97,21 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
-        handler.tick();
+
         if(gameState == STATE.Game) {
-            hud.tick();
-            spawner.tick();
-            if(hud.HEALTH <= 0) {
-                hud.HEALTH = 100;
-                handler.object.clear();
-                gameState = STATE.End;
-                generateParticles();
+            if(!paused) {
+                handler.tick();
+                hud.tick();
+                spawner.tick();
+                if (hud.HEALTH <= 0) {
+                    hud.HEALTH = 100;
+                    handler.object.clear();
+                    gameState = STATE.End;
+                    generateParticles();
                 }
+            }
         } else if(gameState == STATE.Menu || gameState == STATE.End) {
+            handler.tick();
             menu.tick();
         }
     }
@@ -123,6 +129,11 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0,0, WIDTH, HEIGHT);
 
         handler.render(g);
+
+        if (paused) {
+            g.setColor(Color.white);
+            g.drawString("PAUSED", 100, 100);
+        }
 
         if (gameState == STATE.Game) {
             hud.render(g);
