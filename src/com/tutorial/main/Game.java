@@ -20,6 +20,7 @@ public class Game extends Canvas implements Runnable {
     public enum STATE {
         Menu,
         Help,
+        End,
         Game;
     }
 
@@ -28,21 +29,20 @@ public class Game extends Canvas implements Runnable {
     public Game() {
 
         handler = new Handler();
-        menu = new Menu(this, handler);
+        hud = new HUD();
+        menu = new Menu(this, handler, hud);
         this.addMouseListener(menu);
         this.addKeyListener(new KeyInput(handler));
 
         new Window(WIDTH, HEIGHT, "Let's build a game", this);
 
-        hud = new HUD();
+
         spawner = new Spawn(handler, hud);
 
         r = new Random();
 
         if(gameState != STATE.Game) {
-            for(int i = 0; i < 10; i++) {
-                handler.addObject(new MenuParticle(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.MenuParticle, handler));
-            }
+            generateParticles();
         }
     }
 
@@ -96,7 +96,13 @@ public class Game extends Canvas implements Runnable {
         if(gameState == STATE.Game) {
             hud.tick();
             spawner.tick();
-        } else if(gameState == STATE.Menu) {
+            if(hud.HEALTH <= 0) {
+                hud.HEALTH = 100;
+                handler.object.clear();
+                gameState = STATE.End;
+                generateParticles();
+                }
+        } else if(gameState == STATE.Menu || gameState == STATE.End) {
             menu.tick();
         }
     }
@@ -117,7 +123,7 @@ public class Game extends Canvas implements Runnable {
 
         if (gameState == STATE.Game) {
             hud.render(g);
-        }else if(gameState == STATE.Menu || gameState == STATE.Help) {
+        }else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
             menu.render(g);
         }
         g.dispose();
@@ -133,6 +139,12 @@ public class Game extends Canvas implements Runnable {
         }
         else
             return var;
+    }
+
+    private void generateParticles() {
+        for(int i = 0; i < 10; i++) {
+            handler.addObject(new MenuParticle(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.MenuParticle, handler));
+        }
     }
 
     public static void main(String[] args) {

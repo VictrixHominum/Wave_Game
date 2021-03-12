@@ -14,44 +14,55 @@ public class Menu extends MouseAdapter {
     private Game game;
     private Handler handler;
     private Random r = new Random();
+    private HUD hud;
 
-    public Menu(Game game, Handler handler) {
+    public Menu(Game game, Handler handler, HUD hud) {
         this.handler = handler;
         this.game = game;
+        this.hud = hud;
     }
 
     public void mousePressed(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
 
-        if(game.gameState == STATE.Menu || game.gameState == STATE.Help) {
+        if (game.gameState == STATE.Menu || game.gameState == STATE.Help || game.gameState == STATE.End) {
 
-        //Play button
-        if(mouseOver(mx, my, 215, 100, 200, 64)) {
-            handler.object.clear();
-            game.gameState = STATE.Game;
-            handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
+            //Play button
+            if (mouseOver(mx, my, 215, 100, 200, 64)) {
+                handler.object.clear();
+                game.gameState = STATE.Game;
+                handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
 
-            for (int i = 0; i < 1; i++) {
-                handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.BasicEnemy, handler));
+                for (int i = 0; i < 1; i++) {
+                    handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.BasicEnemy, handler));
+                }
             }
-        }
 
-        //Help Button
-        if(mouseOver(mx, my, 215, 200, 200, 64)) {
-            game.gameState = STATE.Help;
-        }
+            //Help Button
+            if (mouseOver(mx, my, 215, 200, 200, 64)) {
+                game.gameState = STATE.Help;
+            }
 
-        //Back Button for Help
-        if(game.gameState == STATE.Help && mouseOver(mx, my, 215,300, 200, 64)) {
-            game.gameState = STATE.Menu;
-            return;
-        }
+            //Back Button for Help
+            if (game.gameState == STATE.Help && mouseOver(mx, my, 215, 300, 200, 64)) {
+                game.gameState = STATE.Menu;
+                return;
+            }
 
-        //Quit Button
-        if(mouseOver(mx, my, 215,300, 200, 64)) {
-            System.exit(1);
-        }
+            //Menu Button for End
+            if (game.gameState == STATE.End && mouseOver(mx, my, 215, 300, 200, 64)) {
+                game.gameState = STATE.Menu;
+                hud.setScore(0);
+                hud.setLevel(1);
+                return;
+            }
+
+
+            //Quit Button
+            if (mouseOver(mx, my, 215, 300, 200, 64)) {
+                System.exit(1);
+            }
         }
     }
 
@@ -69,13 +80,15 @@ public class Menu extends MouseAdapter {
     }
 
     public void render(Graphics g){
+        Font fnt = new Font("arial", BOLD, 50);
+        Font fnt2 = new Font("arial", BOLD, 30);
+        Font fnt3 = new Font("arial", BOLD, 20);
+
+        g.setColor(Color.white);
 
         if(game.gameState == STATE.Menu) {
-            Font fnt = new Font("arial", BOLD, 50);
-            Font fnt2 = new Font("arial", BOLD, 30);
 
             g.setFont(fnt);
-            g.setColor(Color.white);
             g.drawString("Menu", 255, 80);
 
             g.setFont(fnt2);
@@ -89,12 +102,8 @@ public class Menu extends MouseAdapter {
             g.drawString("Quit", 285, 343);
         }
         else if(game.gameState == STATE.Help) {
-            Font fnt = new Font("arial", BOLD, 50);
-            Font fnt2 = new Font("arial", BOLD, 30);
-            Font fnt3 = new Font("arial", BOLD, 20);
 
             g.setFont(fnt);
-            g.setColor(Color.white);
             g.drawString("Help", 255, 80);
 
 
@@ -104,6 +113,19 @@ public class Menu extends MouseAdapter {
             g.setFont(fnt2);
             g.drawRect(215, 300, 200, 64);
             g.drawString("Back", 280, 343);
+        }
+        else if(game.gameState == STATE.End) {
+
+            g.setFont(fnt);
+            g.drawString("Game Over", 185, 80);
+
+
+            g.setFont(fnt3);
+            g.drawString("Score: " + hud.getScore(), 265, 175);
+
+            g.setFont(fnt2);
+            g.drawRect(215, 300, 200, 64);
+            g.drawString("Menu", 278, 343);
         }
     }
 }

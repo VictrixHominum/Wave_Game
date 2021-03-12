@@ -18,7 +18,8 @@ public class Spawn {
         scoreKeep++;
         if(scoreKeep >= 100){
             scoreKeep = 0;
-            hud.setLevel(hud.getLevel() + 1);
+            if(hud.getLevel() <= 10)
+                hud.setLevel(hud.getLevel() + 1);
 
             if(hud.getLevel() == 2) {
                 handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH-32), r.nextInt(Game.HEIGHT-54), ID.BasicEnemy, handler));
