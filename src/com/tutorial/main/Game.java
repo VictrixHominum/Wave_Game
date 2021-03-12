@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable {
         Menu,
         Help,
         End,
+        Select,
         Game;
     }
 
@@ -110,7 +111,7 @@ public class Game extends Canvas implements Runnable {
                     generateParticles();
                 }
             }
-        } else if(gameState == STATE.Menu || gameState == STATE.End) {
+        } else if(gameState == STATE.Menu || gameState == STATE.End || gameState == STATE.Select) {
             handler.tick();
             menu.tick();
         }
@@ -137,7 +138,7 @@ public class Game extends Canvas implements Runnable {
 
         if (gameState == STATE.Game) {
             hud.render(g);
-        }else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
+        }else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.Select) {
             menu.render(g);
         }
         g.dispose();
