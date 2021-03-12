@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 import com.tutorial.main.Game.STATE;
+import org.newdawn.slick.Sound;
 
 import static java.awt.Font.BOLD;
 
@@ -25,6 +26,7 @@ public class Menu extends MouseAdapter {
     public void mousePressed(MouseEvent e) {
         int mx = e.getX();
         int my = e.getY();
+        Sound click = AudioPlayer.getSound("MouseClick");
 
         if (game.gameState == STATE.Menu || game.gameState == STATE.Help || game.gameState == STATE.End) {
 
@@ -37,16 +39,20 @@ public class Menu extends MouseAdapter {
                 for (int i = 0; i < 1; i++) {
                     handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.BasicEnemy, handler));
                 }
+                click.play();
+
             }
 
             //Help Button
             if (mouseOver(mx, my, 215, 200, 200, 64)) {
                 game.gameState = STATE.Help;
+                click.play();
             }
 
             //Back Button for Help
             if (game.gameState == STATE.Help && mouseOver(mx, my, 215, 300, 200, 64)) {
                 game.gameState = STATE.Menu;
+                click.play();
                 return;
             }
 
@@ -55,12 +61,14 @@ public class Menu extends MouseAdapter {
                 game.gameState = STATE.Menu;
                 hud.setScore(0);
                 hud.setLevel(1);
+                click.play();
                 return;
             }
 
 
             //Quit Button
             if (mouseOver(mx, my, 215, 300, 200, 64)) {
+                click.play();
                 System.exit(1);
             }
         }
