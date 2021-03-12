@@ -24,6 +24,8 @@ public class Menu extends MouseAdapter {
         int mx = e.getX();
         int my = e.getY();
 
+        if(game.gameState == STATE.Menu || game.gameState == STATE.Help) {
+
         //Play button
         if(mouseOver(mx, my, 215, 100, 200, 64)) {
             game.gameState = STATE.Game;
@@ -48,6 +50,7 @@ public class Menu extends MouseAdapter {
         //Quit Button
         if(mouseOver(mx, my, 215,300, 200, 64)) {
             System.exit(1);
+        }
         }
     }
 
