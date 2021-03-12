@@ -12,6 +12,10 @@ public class Game extends Canvas implements Runnable {
     private Boolean running = false;
 
     public static Boolean paused = false;
+    public int diff = 0;
+
+    //0 = normal
+    //1 = hard
 
     private Random r;
     private Handler handler;
@@ -43,7 +47,7 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH, HEIGHT, "Let's build a game", this);
 
 
-        spawner = new Spawn(handler, hud);
+        spawner = new Spawn(handler, hud, this);
 
         r = new Random();
 
