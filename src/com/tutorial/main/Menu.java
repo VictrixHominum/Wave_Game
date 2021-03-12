@@ -3,15 +3,35 @@ package com.tutorial.main;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
+
+import com.tutorial.main.Game.STATE;
 
 import static java.awt.Font.BOLD;
 
 public class Menu extends MouseAdapter {
 
+    private Game game;
+    private Handler handler;
+    private Random r = new Random();
+
+    public Menu(Game game, Handler handler) {
+        this.handler = handler;
+        this.game = game;
+    }
+
     public void mousePressed(MouseEvent e) {
         int mx = e.getX();
-        int my = e.getX();
+        int my = e.getY();
 
+        if(mouseOver(mx, my, 215, 100, 200, 64)) {
+            game.gameState = STATE.Game;
+            handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
+
+            for (int i = 0; i < 1; i++) {
+                handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.BasicEnemy, handler));
+            }
+        }
     }
 
     public void mouseReleased(MouseEvent e) {
