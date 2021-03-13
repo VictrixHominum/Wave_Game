@@ -42,7 +42,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(handler, this));
 
         AudioPlayer.load();
-        AudioPlayer.getMusic("ContraChop").loop();
+        //AudioPlayer.getMusic("ContraChop").loop();
 
         new Window(WIDTH, HEIGHT, "Let's build a game", this);
 

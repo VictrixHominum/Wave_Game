@@ -69,12 +69,12 @@ public class Menu extends MouseAdapter {
             }
 
             //Normal Difficulty Select
-            if (game.gameState == STATE.Select && mouseOver(mx, my, 215, 200, 200, 64)) {
+            if (game.gameState == STATE.Select && mouseOver(mx, my, 215, 100, 200, 64)) {
                 click.play();
-                game.diff = 1;
                 handler.object.clear();
                 game.gameState = STATE.Game;
-                handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
+                game.diff = 0;
+                handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler, hud));
                 for (int i = 0; i < 1; i++) {
                     handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.BasicEnemy, handler));
                 }
@@ -82,13 +82,14 @@ public class Menu extends MouseAdapter {
             }
 
             //Hard Difficulty Select
-            if (game.gameState == STATE.Select && mouseOver(mx, my, 215, 100, 200, 64)) {
+            if (game.gameState == STATE.Select && mouseOver(mx, my, 215, 200, 200, 64)) {
                 click.play();
+                game.diff = 1;
                 handler.object.clear();
                 game.gameState = STATE.Game;
-                handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler));
+                handler.addObject(new Player(Game.WIDTH / 2 - 32, Game.HEIGHT / 2 - 32, ID.Player, handler, hud));
                 for (int i = 0; i < 1; i++) {
-                    handler.addObject(new BasicEnemy(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.BasicEnemy, handler));
+                    handler.addObject(new HardEnemy(r.nextInt(Game.WIDTH - 32), r.nextInt(Game.HEIGHT - 54), ID.HardEnemy, handler));
                 }
                 return;
             }
