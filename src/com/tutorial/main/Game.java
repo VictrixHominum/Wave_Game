@@ -17,18 +17,18 @@ public class Game extends Canvas implements Runnable {
     //0 = normal
     //1 = hard
 
-    private Random r;
-    private Handler handler;
-    private HUD hud;
-    private Spawn spawner;
-    private Menu menu;
+    private final Random r;
+    private final Handler handler;
+    private final HUD hud;
+    private final Spawn spawner;
+    private final Menu menu;
 
     public enum STATE {
         Menu,
         Help,
         End,
         Select,
-        Game;
+        Game
     }
 
     public STATE gameState = STATE.Menu;
@@ -38,14 +38,14 @@ public class Game extends Canvas implements Runnable {
         handler = new Handler();
         hud = new HUD();
         menu = new Menu(this, handler, hud);
+
         this.addMouseListener(menu);
         this.addKeyListener(new KeyInput(handler, this));
 
         AudioPlayer.load();
         AudioPlayer.getMusic("ContraChop").loop();
 
-        new Window(WIDTH, HEIGHT, "Let's build a game", this);
-
+        new Window(WIDTH, HEIGHT, "Wave", this);
 
         spawner = new Spawn(handler, hud, this);
 
@@ -108,8 +108,8 @@ public class Game extends Canvas implements Runnable {
                 handler.tick();
                 hud.tick();
                 spawner.tick();
-                if (hud.HEALTH <= 0) {
-                    hud.HEALTH = 100;
+                if (HUD.HEALTH <= 0) {
+                    HUD.HEALTH = 100;
                     handler.object.clear();
                     gameState = STATE.End;
                     generateParticles();

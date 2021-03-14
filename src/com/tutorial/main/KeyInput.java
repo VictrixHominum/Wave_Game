@@ -5,9 +5,9 @@ import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
 
-    private Handler handler;
-    private Game game;
-    private boolean[] keyDown = {false, false, false, false};
+    private final Handler handler;
+    private final Game game;
+    private final boolean[] keyDown = {false, false, false, false};
 
     public KeyInput(Handler handler, Game game) {
         this.handler = handler;

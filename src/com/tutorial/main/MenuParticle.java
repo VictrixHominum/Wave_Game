@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class MenuParticle extends GameObject{
 
-    private Handler handler;
-    private Random r = new Random();
+    private final Handler handler;
+    private final Random r = new Random();
 
-    private Color col;
+    private final Color col;
 
     int dir = 0;
 

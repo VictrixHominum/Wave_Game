@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class BasicEnemy extends GameObject{
 
-    private Handler handler;
+    private final Handler handler;
 
     public BasicEnemy(int x, int y, ID id, Handler handler) {
         super(x, y, id);

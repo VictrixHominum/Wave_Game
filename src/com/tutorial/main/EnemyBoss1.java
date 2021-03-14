@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class EnemyBoss1 extends GameObject{
 
-    private Handler handler;
+    private final Handler handler;
     private int timer = 80;
     private int timer2 = 50;
-    private Random r = new Random();
+    private final Random r = new Random();
 
     public EnemyBoss1(int x, int y, ID id, Handler handler) {
         super(x, y, id);

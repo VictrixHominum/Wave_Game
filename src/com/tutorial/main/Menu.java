@@ -12,10 +12,10 @@ import static java.awt.Font.BOLD;
 
 public class Menu extends MouseAdapter {
 
-    private Game game;
-    private Handler handler;
-    private Random r = new Random();
-    private HUD hud;
+    private final Game game;
+    private final Handler handler;
+    private final Random r = new Random();
+    private final HUD hud;
 
     public Menu(Game game, Handler handler, HUD hud) {
         this.handler = handler;

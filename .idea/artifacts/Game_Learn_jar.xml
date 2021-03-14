@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Game_Learn:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Game_Learn_jar</output-path>
+    <root id="archive" name="Game_Learn.jar">
+      <element id="module-output" name="Game_Learn" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Libs/Libs/jars/lwjgl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Libs/Libs/jars/jorbis-0.0.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Libs/Libs/jars/jogg-0.0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Libs/Libs/jars/slick.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../Libs/Libs/jars/jinput.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
